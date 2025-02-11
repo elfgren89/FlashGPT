@@ -60,11 +60,6 @@ frontendkopia/
 *.swo
 *~
 
-# Dependency lock files (optional, depending on your workflow)
-package-lock.json
-frontend/package-lock.json
-backend/package-lock.json
-
 # Compiled binary objects
 *.o
 *.obj
