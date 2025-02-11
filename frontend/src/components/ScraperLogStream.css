@@ -1,0 +1,56 @@
+/* Skraploggens container */
+.scraper-log-container {
+  margin: 20px auto;
+  max-width: 650px; /* Matches the rest of the UI */
+  background-color: #111;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00ff00;
+  text-align: left;
+  font-family: monospace;
+  color: #00ff00;
+  height: 160px; /* Fixed height */
+  border: 1px solid #00ff00;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Skraploggens titel */
+.scraper-log-title {
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Innehållet i skraploggen */
+.scraper-log-content {
+  flex-grow: 1;
+  overflow-y: auto; /* Ensures internal scrolling */
+  padding-right: 10px;
+  max-height: 120px; /* Keeps scrolling inside the container */
+  word-break: break-word; /* Prevents text overflow */
+  padding-left: 5px;
+  scrollbar-width: thin;
+  scrollbar-color: #006600 #111;
+}
+
+/* Scrollbar-styling (modern and stylish) */
+.scraper-log-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scraper-log-content::-webkit-scrollbar-track {
+  background: #111; /* Same background as container */
+  border-radius: 10px;
+}
+
+.scraper-log-content::-webkit-scrollbar-thumb {
+  background: #006600; /* Dark green scrollbar */
+  border-radius: 10px;
+  border: 2px solid #003b00; /* Darker green border */
+}
+
+.scraper-log-content::-webkit-scrollbar-thumb:hover {
+  background: #00ff00; /* Bright green on hover */
+}

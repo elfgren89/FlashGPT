@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend-production
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - FRONTEND_URL=${FRONTEND_URL}
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "http://localhost:5000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - forum-scraper-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: frontend-production
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_BASE_URL=${BACKEND_URL}/api
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - forum-scraper-network
+
+networks:
+  forum-scraper-network:
+    driver: bridge

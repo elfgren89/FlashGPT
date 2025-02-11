@@ -1,0 +1,50 @@
+/* File: frontend/src/index.css */
+
+/* Globala stilar för mörkt hacker-tema */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Rubriker */
+h1, h2, h3 {
+  text-align: center;
+}
+
+/* Inmatningsfält och knappar */
+input, textarea, select, button {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #00cc00;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Terminalstil för typewriter-effekten */
+.terminal {
+  white-space: pre-wrap;
+  text-align: left;
+}
+

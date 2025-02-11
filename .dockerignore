@@ -1,0 +1,51 @@
+# Dependency directories
+node_modules
+backend/node_modules
+frontend/node_modules
+npm-debug.log
+**/node_modules
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build output
+build
+dist
+out
+
+# Source control
+.git
+.gitignore
+
+# IDE and editor files
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Backup and temporary directories
+backendkopia
+frontendkopia
+*.bak
+*.tmp
+
+# Logs
+logs
+*.log
+
+# TypeScript build cache (if using TypeScript)
+*.tsbuildinfo
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Docker-related files
+Dockerfile
+docker-compose.yml
+.dockerignore
