@@ -7,61 +7,44 @@
     # ----------------------------
     # Backend Build Stage
     # ----------------------------
-    FROM base AS backend-build
+    FROM base AS backend
     WORKDIR /app/backend
-    
-    # Install dependencies
     COPY backend/package*.json ./
-    RUN npm ci --only=production
-    
-    # Copy backend source
+    RUN npm ci --production
     COPY backend/ ./
     
     # ----------------------------
     # Frontend Build Stage
     # ----------------------------
-    FROM base AS frontend-build
+    FROM base AS frontend
     WORKDIR /app/frontend
-    
-    # Install dependencies
     COPY frontend/package*.json ./
     RUN npm ci
-    
-    # Build frontend
     COPY frontend/ ./
     RUN npm run build
     
     # ----------------------------
-    # Backend Production Stage
+    # Production Stage
     # ----------------------------
-    FROM base AS backend-production
-    WORKDIR /app/backend
+    FROM base AS production
+    WORKDIR /app
     
-    # Copy built backend
-    COPY --from=backend-build /app/backend ./
+    # Copy backend
+    COPY --from=backend /app/backend ./backend
+    
+    # Copy frontend build
+    COPY --from=frontend /app/frontend/build ./frontend/build
+    
+    # Install production dependencies
+    RUN npm install -g serve
     
     # Environment variables
     ENV NODE_ENV=production
-    ARG FRONTEND_URL
-    ENV FRONTEND_URL=$FRONTEND_URL
+    ENV PORT=5000
+    ENV REACT_APP_API_BASE_URL=/
     
-    # Expose and run
+    # Expose port (Render requires PORT env var)
     EXPOSE 5000
-    CMD ["node", "server.js"]
     
-    # ----------------------------
-    # Frontend Production Stage
-    # ----------------------------
-    FROM base AS frontend-production
-    WORKDIR /app/frontend
-    
-    # Copy built frontend
-    COPY --from=frontend-build /app/frontend/build ./build
-    
-    # Install serve and configure
-    RUN npm install -g serve
-    ENV REACT_APP_API_BASE_URL=${BACKEND_URL}/api
-    
-    # Expose and run
-    EXPOSE 3000
-    CMD ["serve", "-s", "build", "-l", "3000"]
+    # Start command
+    CMD ["sh", "-c", "node backend/server.js & serve -s frontend/build -l 5000"]

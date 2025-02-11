@@ -52,12 +52,12 @@ app.use((req, res, next) => {
 // responsible for serving the React static files.
 // The following static file–serving middleware is not needed and is commented out.
 // ------------------------------------------------------------------
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "../frontend/build")));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
-//   });
-// }
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+  });
+}
 
 // -------------------------
 // API Endpoint: Scrape Forum Thread
