@@ -52,8 +52,12 @@ app.use((req, res, next) => {
 // responsible for serving the React static files.
 // The following static file–serving middleware is not needed and is commented out.
 // ------------------------------------------------------------------
+// Serve frontend in production
 if (process.env.NODE_ENV === "production") {
+  // Serve static files from frontend build
   app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+  // Handle React routing - return all requests to React app
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
   });

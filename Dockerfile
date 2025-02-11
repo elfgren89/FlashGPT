@@ -24,27 +24,26 @@
     RUN npm run build
     
     # ----------------------------
-    # Production Stage
-    # ----------------------------
-    FROM base AS production
-    WORKDIR /app
-    
-    # Copy backend
-    COPY --from=backend /app/backend ./backend
-    
-    # Copy frontend build
-    COPY --from=frontend /app/frontend/build ./frontend/build
-    
-    # Install production dependencies
-    RUN npm install -g serve
-    
-    # Environment variables
-    ENV NODE_ENV=production
-    ENV PORT=5000
-    ENV REACT_APP_API_BASE_URL=/
-    
-    # Expose port (Render requires PORT env var)
-    EXPOSE 5000
-    
-    # Start command
-    CMD ["sh", "-c", "node backend/server.js & serve -s frontend/build -l 5000"]
+# Production Stage
+# ----------------------------
+FROM base AS production
+WORKDIR /app
+
+# Copy backend
+COPY --from=backend /app/backend ./backend
+
+# Copy frontend build
+COPY --from=frontend /app/frontend/build ./frontend/build
+
+# Environment variables
+ENV NODE_ENV=production
+ENV PORT=5000
+
+# Install production dependencies
+RUN npm install -g serve
+
+# Expose port (Render requires PORT env var)
+EXPOSE 5000
+
+# Start command (ONLY backend - frontend is served through Express)
+CMD ["node", "backend/server.js"]
