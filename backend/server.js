@@ -209,9 +209,6 @@ app.get('/health', (req, res) => {
 });
 
 
-// API routes must come AFTER static files
-app.use('/api', require('./routes'));  // Your existing API routes
-
 // Handle client-side routing
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
