@@ -63,6 +63,7 @@ if (process.env.NODE_ENV === "production") {
       }
     }
   }));
+  
 
   // Handle React routing - return all requests to React app
   app.get("*", (req, res) => {
@@ -207,7 +208,15 @@ app.get('/health', (req, res) => {
   res.status(200).send('OK');
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Servern kör på port ${PORT}`);
+
+// API routes must come AFTER static files
+app.use('/api', require('./routes'));  // Your existing API routes
+
+// Handle client-side routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
 });

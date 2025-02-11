@@ -13,39 +13,34 @@
     RUN npm ci --production
     COPY backend/ ./
     
-   # ----------------------------
-# Frontend Build Stage
-# ----------------------------
-FROM base AS frontend
-WORKDIR /app/frontend
-COPY frontend/package*.json ./
-RUN npm ci
-COPY frontend/ ./
-RUN npm run build && \
-    rm -rf ../frontend/build/static/js/*.map && \
-    rm -rf ../frontend/build/static/css/*.map
+    # ----------------------------
+    # Frontend Build Stage
+    # ----------------------------
+    FROM base AS frontend
+    WORKDIR /app/frontend
+    COPY frontend/package*.json ./
+    RUN npm ci
+    COPY frontend/ ./
+    RUN npm run build
     
     # ----------------------------
-# Production Stage
-# ----------------------------
-FROM base AS production
-WORKDIR /app
-
-# Copy backend
-COPY --from=backend /app/backend ./backend
-
-# Copy frontend build
-COPY --from=frontend /app/frontend/build ./frontend/build
-
-# Environment variables
-ENV NODE_ENV=production
-ENV PORT=5000
-
-# Install production dependencies
-RUN npm install -g serve
-
-# Expose port (Render requires PORT env var)
-EXPOSE 5000
-
-# Start command (ONLY backend - frontend is served through Express)
-CMD ["node", "backend/server.js"]
+    # Production Stage
+    # ----------------------------
+    FROM base AS production
+    WORKDIR /app
+    
+    # Copy backend
+    COPY --from=backend /app/backend ./backend
+    
+    # Copy frontend build
+    COPY --from=frontend /app/frontend/build ./public
+    
+    # Environment variables
+    ENV NODE_ENV=production
+    ENV PORT=5000
+    
+    # Expose port
+    EXPOSE 5000
+    
+    # Start command
+    CMD ["node", "backend/server.js"]
