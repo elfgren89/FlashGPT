@@ -13,15 +13,17 @@
     RUN npm ci --production
     COPY backend/ ./
     
-    # ----------------------------
-    # Frontend Build Stage
-    # ----------------------------
-    FROM base AS frontend
-    WORKDIR /app/frontend
-    COPY frontend/package*.json ./
-    RUN npm ci
-    COPY frontend/ ./
-    RUN npm run build
+   # ----------------------------
+# Frontend Build Stage
+# ----------------------------
+FROM base AS frontend
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ ./
+RUN npm run build && \
+    rm -rf ../frontend/build/static/js/*.map && \
+    rm -rf ../frontend/build/static/css/*.map
     
     # ----------------------------
 # Production Stage

@@ -55,7 +55,14 @@ app.use((req, res, next) => {
 // Serve frontend in production
 if (process.env.NODE_ENV === "production") {
   // Serve static files from frontend build
-  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.use(express.static(path.join(__dirname, "../frontend/build"), {
+    maxAge: '1d',
+    setHeaders: (res, path) => {
+      if (path.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'no-cache');
+      }
+    }
+  }));
 
   // Handle React routing - return all requests to React app
   app.get("*", (req, res) => {
