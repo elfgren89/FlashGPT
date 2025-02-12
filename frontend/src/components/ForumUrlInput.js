@@ -12,10 +12,17 @@ const ForumUrlInput = ({ value, onChange, placeholder, onSelect }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    // 1. Logga i webbläsarens konsol vad REACT_APP_API_BASE_URL faktiskt är.
+    console.log("[ForumUrlInput] REACT_APP_API_BASE_URL =", API_BASE_URL);
+
     const fetchThreads = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${API_BASE_URL}/popular-threads`);
+        // 2. Logga vilken URL vi anropar innan fetch
+        const urlToFetch = `${API_BASE_URL}/popular-threads`;
+        console.log("[ForumUrlInput] Fetching popular threads from:", urlToFetch);
+
+        const response = await fetch(urlToFetch);
         const data = await response.json();
         setPopularThreads(data.threads || []);
       } catch (err) {
