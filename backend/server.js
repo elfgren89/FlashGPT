@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: "https://flashgpt.onrender.com", // eller "*"
+  origin: "*",// eller "*"
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true // om du använder cookies/sessions
@@ -168,10 +168,6 @@ app.get("/api/popular-threads", async (req, res) => {
     console.error("Fel vid hämtning av populära ämnen:", error.message);
     res.status(500).json({ error: "Fel vid hämtning av populära ämnen." });
   }
-});
-
-app.get("/api/health", (req, res) => {
-  res.status(200).send("OK");
 });
 
 
