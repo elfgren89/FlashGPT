@@ -24,10 +24,7 @@ app.use(limiter);
 
 // Öka JSON‑parsinggränsen om du hanterar stora payloads
 app.use(express.json({ limit: "100mb" }));
-const corsOptions = {
-  origin: "*", // Allow all origins; for a production setup, consider whitelisting specific domains.
-};
-app.use(cors(corsOptions));
+
 // Sätt Content-Type med UTF-8 för att säkerställa att åäö visas korrekt
 app.use((req, res, next) => {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
@@ -168,6 +165,10 @@ app.get("/api/popular-threads", async (req, res) => {
     console.error("Fel vid hämtning av populära ämnen:", error.message);
     res.status(500).json({ error: "Fel vid hämtning av populära ämnen." });
   }
+});
+
+app.get("/api/health", (req, res) => {
+  res.status(200).send("OK");
 });
 
 

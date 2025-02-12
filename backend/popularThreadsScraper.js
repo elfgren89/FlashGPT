@@ -9,8 +9,15 @@ async function getPopularThreads() {
     // Request the page as an arraybuffer and decode using latin1 to preserve Swedish characters
     const response = await axios.get(url, {
       responseType: "arraybuffer",
-      headers: { "User-Agent": "Mozilla/5.0" }
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                      "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                      "Chrome/96.0.4664.93 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "sv-SE,sv;q=0.9,en-US;q=0.8,en;q=0.7"
+      }
     });
+
     const html = iconv.decode(response.data, "latin1");
     const $ = cheerio.load(html);
     const threads = [];
@@ -49,9 +56,24 @@ async function getPopularThreads() {
         replies,
       });
     });
+
     return threads;
   } catch (error) {
     console.error("Fel vid hämtning av populära ämnen:", error.message);
+
+    // Logga mer detaljer om Axios-responsen, om den finns
+    if (error.response) {
+      console.error("Status code:", error.response.status);
+      console.error("Response headers:", error.response.headers);
+      try {
+        // Logga första 200 tecknen av HTML-svaret, om möjligt
+        const partialData = iconv.decode(error.response.data, "latin1").slice(0, 200);
+        console.error("Partial response data:", partialData);
+      } catch (decodeError) {
+        console.error("Kunde inte decoda eller läsa response-data:", decodeError.message);
+      }
+    }
+
     throw error;
   }
 }
