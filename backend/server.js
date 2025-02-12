@@ -46,11 +46,12 @@ app.use((req, res, next) => {
 // Serve Frontend Static Files
 // -------------------------
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  // Servera statiska filer från /backend/frontend/build
+  app.use(express.static(path.join(__dirname, "frontend/build")));
 
-  // Handle React Routing - Serve index.html for unknown routes
+  // Hantera React Router - skicka index.html för okända routes
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+    res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
   });
 }
 
@@ -65,7 +66,12 @@ app.get("/api/scrape", async (req, res) => {
   if (!url) return res.status(400).json({ error: "Parameter 'url' saknas" });
 
   try {
-    const result = await scraper.scrapeForumThread(url, parseInt(interval, 10), 2000, parseInt(maxPages, 10));
+    const result = await scraper.scrapeForumThread(
+      url,
+      parseInt(interval, 10),
+      2000,
+      parseInt(maxPages, 10)
+    );
     const posts = result.posts;
     const fullText = posts.map((p) => p.content).join("\n\n");
     const tokenInfo = countTokensAndCost(fullText);
@@ -95,12 +101,25 @@ app.get("/api/scrape-stream", async (req, res) => {
   };
 
   try {
-    const result = await scraper.scrapeForumThread(url, parseInt(interval, 10), 2000, parseInt(maxPages, 10), logCallback);
+    const result = await scraper.scrapeForumThread(
+      url,
+      parseInt(interval, 10),
+      2000,
+      parseInt(maxPages, 10),
+      logCallback
+    );
     const posts = result.posts;
     const fullText = posts.map((p) => p.content).join("\n\n");
     const tokenInfo = countTokensAndCost(fullText);
 
-    res.write(`event: result\ndata: ${JSON.stringify({ posts, fullText, tokenInfo, logMessages: result.logMessages })}\n\n`);
+    res.write(
+      `event: result\ndata: ${JSON.stringify({
+        posts,
+        fullText,
+        tokenInfo,
+        logMessages: result.logMessages,
+      })}\n\n`
+    );
     res.end();
   } catch (error) {
     res.write(`data: Fel vid skrapning: ${error.message}\n\n`);
@@ -116,7 +135,9 @@ app.post("/api/analyze", async (req, res) => {
 
   try {
     const analysisResult = await analyzeText({ text, question });
-    if (!analysisResult) return res.status(500).json({ error: "Inget analysresultat genererades" });
+    if (!analysisResult) {
+      return res.status(500).json({ error: "Inget analysresultat genererades" });
+    }
 
     res.json({ result: analysisResult, status: "success" });
   } catch (error) {
@@ -153,8 +174,8 @@ app.get("/api/popular-threads", async (req, res) => {
 });
 
 // Health Check Endpoint
-app.get('/health', (req, res) => {
-  res.status(200).send('OK');
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
 });
 
 // -------------------------
