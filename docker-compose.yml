@@ -1,17 +1,29 @@
 version: "3.8"
 
 services:
-  app:
+  backend:
     build:
-      context: .
+      context: ./backend          # Bygger från backend-mappen
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "5000:5000"               # Exponerar port 5000 utåt
+    env_file:
+      - ./backend/.env            # (om du vill läsa in API-keys)
     environment:
-      # Exempel på miljövariabler (kasta in vad du behöver!)
-      NODE_ENV: "production"
-      PORT: "5000"
-      OPENAI_API_KEY: "3YN7rHqsH3NiXosTl8iUpgdCTKNS37ciHKaLQifoLw3bQrd3CxZ4sc1h0qFe7fnfOHvE4T3BlbkFJdFpmksgPakjV68DTGfm_2uUF4KETN2YlP1ogGcygrUXbOVdIfsS77JZxohMS4eN3C"
-      GEMINI_API_KEY: "AIzaSyCSgDMlx9DI10"
-      FRONTEND_URL: "http://localhost:5000"
+      NODE_ENV: "production"      # valfritt, men bra om du vill kör prd-läge
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend         # Bygger från frontend-mappen
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"               # Exponerar port 3000 utåt
+    depends_on:
+      - backend
+    environment:
+      # Om du vill att frontend ska anropa backend lokalt:
+      REACT_APP_API_BASE_URL: "http://localhost:5000"
+      # Ovannämnda variabel (REACT_APP_API_BASE_URL) kan i din React-kod
+      # anropas via process.env.REACT_APP_API_BASE_URL
     restart: unless-stopped
