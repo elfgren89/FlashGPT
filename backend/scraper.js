@@ -174,7 +174,7 @@ async function scrapeForumThread(url, interval = 1, delay = 2000, maxPages = nul
   if (maxPageCount !== null) {
     pushLog(`Totalt antal sidor: ${maxPageCount}`);
   } else {
-    pushLog("Kunde inte läsa totalt antal sidor med Puppeteer. Fortsätter med 1 sida.");
+    pushLog("Kunde inte läsa totalt antal sidor. Fortsätter med 1 sida.");
     maxPageCount = 1;
   }
   if (threadTitle) {
