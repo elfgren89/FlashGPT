@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 // Hämta API-bas URL från miljövariabeln
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://flashgpt:5000";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "/api";
 
 
 const ForumUrlInput = ({ value, onChange, placeholder, onSelect }) => {

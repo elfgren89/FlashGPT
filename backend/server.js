@@ -8,7 +8,7 @@ const { countTokensAndCost } = require("./tokenCounter");
 const { analyzeText } = require("./model");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Rate limiting middleware
 const limiter = rateLimit({
@@ -159,13 +159,13 @@ app.get("/api/page-count", async (req, res) => {
 
 // New endpoint for popular threads
 const { getPopularThreads } = require("./popularThreadsScraper");
-app.get("/api/popular-threads", async (req, res) => {
+app.get('/api/popular-threads', async (req, res) => {
   try {
     const threads = await getPopularThreads();
     res.json({ threads });
   } catch (error) {
-    console.error("Fel vid hämtning av populära ämnen:", error.message);
-    res.status(500).json({ error: "Fel vid hämtning av populära ämnen." });
+    console.error('Error:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -181,11 +181,7 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-  if (!req.path.startsWith('/api')) {
-    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-  } else {
-    next();
-  }
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 
