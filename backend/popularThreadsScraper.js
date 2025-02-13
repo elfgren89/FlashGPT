@@ -10,11 +10,12 @@ async function getPopularThreads() {
     const response = await axios.get(url, {
       responseType: "arraybuffer",
       headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                      "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                      "Chrome/96.0.4664.93 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-        "Accept-Language": "sv-SE,sv;q=0.9,en-US;q=0.8,en;q=0.7"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "sv-SE,sv;q=0.9",
+        "Referer": "https://www.flashback.org/",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate"
       }
     });
 
@@ -61,12 +62,12 @@ async function getPopularThreads() {
   } catch (error) {
     console.error("Fel vid hämtning av populära ämnen:", error.message);
 
-    // Logga mer detaljer om Axios-responsen, om den finns
+    // Log more details if Axios response exists
     if (error.response) {
       console.error("Status code:", error.response.status);
       console.error("Response headers:", error.response.headers);
       try {
-        // Logga första 200 tecknen av HTML-svaret, om möjligt
+        // Log first 200 characters of the response, if possible
         const partialData = iconv.decode(error.response.data, "latin1").slice(0, 200);
         console.error("Partial response data:", partialData);
       } catch (decodeError) {
@@ -74,8 +75,19 @@ async function getPopularThreads() {
       }
     }
 
+    // Log full error object for debugging
+    console.error("Full error object:", error);
+
+    if (error.response) {
+      console.error("Response status:", error.response.status);
+      console.error("Response headers:", error.response.headers);
+      console.error("Full response body:", iconv.decode(error.response.data, "latin1"));
+    }
+
+    throw new Error("Kunde inte hämta populära trådar. Försök igen senare.");
+  }
+
     throw error;
   }
-}
 
 module.exports = { getPopularThreads };
