@@ -1,20 +1,13 @@
-#docker-compose.yml
-
-version: "3.8"
-
 services:
   flashgpt:
     build:
       context: .
       dockerfile: Dockerfile.single
       args:
-        REACT_APP_API_BASE_URL: "http://localhost:5000"
+        REACT_APP_API_BASE_URL: "https://flashgpt.onrender.com/api"  # Use your actual domain
     ports:
       - "3000:3000"
       - "5000:5000"
     env_file:
       - ./backend/.env
     restart: unless-stopped
-    volumes:
-      - ./backend:/app/backend
-      - ./frontend:/app/frontend
