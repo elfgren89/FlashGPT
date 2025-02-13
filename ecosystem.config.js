@@ -10,8 +10,8 @@ module.exports = {
     },
     {
       name: "frontend",
-      script: "npx",
-      args: ["serve", "-s", "/app/frontend/build", "-l", "3000"],
+      script: "serve",
+      args: ["-s", "/app/frontend/build", "-p", "3000"],
       env: {
         NODE_ENV: "production"
       }
