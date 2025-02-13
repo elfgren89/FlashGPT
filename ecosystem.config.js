@@ -1,3 +1,4 @@
+// ecosystem.config.js
 module.exports = {
   apps: [
     {
@@ -10,10 +11,18 @@ module.exports = {
     },
     {
       name: "frontend",
-      script: "serve",
-      args: ["-s", "/app/frontend/build", "-p", "3000"],
+      script: "serve",  // Changed from "npx" to direct "serve" command
+      args: [
+        "-s", 
+        "/app/frontend/build", 
+        "-l", 
+        "tcp://0.0.0.0:3000"  // This is the crucial binding fix
+      ],
       env: {
-        NODE_ENV: "production"
+        NODE_ENV: "production",
+        PM2_SERVE_PATH: "/app/frontend/build",
+        PM2_SERVE_PORT: 3000,
+        PM2_SERVE_SPA: "true"
       }
     }
   ]
