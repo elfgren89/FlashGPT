@@ -185,6 +185,4 @@ app.get('*', (req, res) => {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Servern kör på port ${PORT}`);
-});
+app.listen(5000, "0.0.0.0", () => console.log("Server running on port 5000"));
