@@ -73,7 +73,7 @@ npm start
 
 | Komponent   | Teknologi |
 |-------------|----------|
-| **Frontend**  | React, Serve (för statiska filer) |
+| **Frontend**  | React|
 | **Backend**   | Node.js, Express, Cheerio (för web scraping) |
 | **Datakällor** | Flashback.org |
 | **AI-modeller** | OpenAI GPT & Gemini |
