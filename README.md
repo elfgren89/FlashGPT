@@ -29,11 +29,12 @@ GEMINI_API_KEY=din_gemini_nyckel
 Om du använder Docker:
 
 Bygg backend- och frontend-images:
+```sh
 docker build -t flashgpt-backend -f backend/Dockerfile backend/
 docker build -t flashgpt-frontend -f frontend/Dockerfile frontend/
+```
 
 Starta med Docker Compose:
-
 ```sh
 docker-compose -p flashgpt up -d --build
 ```
