@@ -1,7 +1,8 @@
 # FlashGPT - Din AI-assistent för flashback.org
 
-![FlashGPT Gränssnitt](public/FlashGPT1.png)
-![Exempel på analys](public/FlashGPT2.png)
+![FlashGPT Gränssnitt](FlashGPT1.png)
+![Exempel på analys](FlashGPT2.png)
+
 
 **FlashGPT** är ett verktyg för att snabbt analysera och sammanfatta forumtrådar på **Flashback**. Istället för att manuellt plöja igenom hundratals inlägg kan du skrapa trådar och få en sammanfattning direkt. Perfekt för att snabbt få en överblick över heta diskussioner.
 
