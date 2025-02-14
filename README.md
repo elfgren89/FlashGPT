@@ -64,7 +64,10 @@ Om du vill använda den färdigbyggda versionen från **Docker Hub**:
 **Ladda ner & starta FlashGPT direkt från Docker Hub**
 ```sh
 docker pull elfgren89/flashgpt:latest
-docker run -d --name flashgpt -p 3000:3000 -p 5000:5000 elfgren89/flashgpt
+docker run -d --name flashgpt \
+  -p 3000:3000 -p 5000:5000 \
+  -e GEMINI_API_KEY=din_gemini_nyckel \
+  elfgren89/flashgpt
 ```
 
 
