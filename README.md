@@ -71,7 +71,7 @@ docker pull elfgren89/flashgpt:latest
 docker run -d --name flashgpt -p 3000:3000 -p 5000:5000 -e GEMINI_API_KEY=your_gemini_key_here -e USE_GEMINI=true elfgren89/flashgpt
 
 ```
-(But ut your_gemini_key_here till din faktiska nyckel! Gratis nyckel kan hämtas här: https://aistudio.google.com/app/apikey)
+(Byt ut your_gemini_key_here till din faktiska nyckel! Gratis nyckel kan hämtas här: https://aistudio.google.com/app/apikey)
 
 
 
