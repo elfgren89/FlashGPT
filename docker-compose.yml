@@ -1,14 +1,22 @@
 version: "3.8"
 
 services:
-  flashgpt:
-    build:
-      context: .
-      dockerfile: Dockerfile.single
-      args:
-        REACT_APP_API_BASE_URL: "/api"  # Använd relativ path
+  backend:
+    image: flashgpt-backend
+    container_name: flashgpt-backend
+    ports:
+      - "5000:5000"
+    env_file: 
+      - ./backend/.env   # Load .env file at runtime, NOT during build!
+    environment:
+      - NODE_ENV=production
+
+  frontend:
+    image: flashgpt-frontend
+    container_name: flashgpt-frontend
     ports:
       - "3000:3000"
-    env_file:
-      - ./backend/.env
-    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_BASE_URL=http://localhost:5000/api

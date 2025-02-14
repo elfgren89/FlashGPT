@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 // Hämta API-bas URL från miljövariabeln
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "/api";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000/api";
 
 
 const ForumUrlInput = ({ value, onChange, placeholder, onSelect }) => {
