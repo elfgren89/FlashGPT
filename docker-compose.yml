@@ -1,22 +1,13 @@
 version: "3.8"
 
 services:
-  backend:
-    image: flashgpt-backend
-    container_name: flashgpt-backend
-    ports:
-      - "5000:5000"
-    env_file: 
-      - ./backend/.env   # Load .env file at runtime, NOT during build!
-    environment:
-      - NODE_ENV=production
-
-  frontend:
-    image: flashgpt-frontend
-    container_name: flashgpt-frontend
+  flashgpt:
+    image: elfgren89/flashgpt
+    container_name: flashgpt
     ports:
       - "3000:3000"
-    depends_on:
-      - backend
+      - "5000:5000"
+    env_file: 
+      - ./backend/.env  # Load environment variables at runtime
     environment:
-      - REACT_APP_API_BASE_URL=http://localhost:5000/api
+      - NODE_ENV=production

@@ -30,5 +30,9 @@
 **/values.dev.yaml
 **/build
 **/dist
+**/gemini-raw-response.txt
+**/openai-processed-response.txt
+**/openai-raw-response.txt
+**/openai-response.txt
 LICENSE
 README.md

@@ -31,22 +31,9 @@ OPENAI_API_KEY=din_openai_nyckel
 GEMINI_API_KEY=din_gemini_nyckel
 ```
 
-### 3️⃣ Bygg & starta med Docker
-Om du använder Docker:
+---
 
-Bygg backend- och frontend-images:
-```sh
-docker build -t flashgpt-backend -f backend/Dockerfile backend/
-docker build -t flashgpt-frontend -f frontend/Dockerfile frontend/
-```
-
-Starta med Docker Compose:
-```sh
-docker-compose -p flashgpt up -d --build
-```
-Detta startar både **backend** och **frontend** i separata containrar.
-
-### 4️⃣ Kör manuellt (utan Docker)
+###  3️⃣Kör manuellt (utan Docker)
 Om du vill köra direkt på din dator:
 
 #### 🖥️ Backend
@@ -63,11 +50,37 @@ npm install
 npm start
 ```
 
-### 5️⃣ Öppna i webbläsaren
+### 4️⃣Öppna i webbläsaren
 - **Frontend** körs på: [http://localhost:3000](http://localhost:3000)
 - **Backend** körs på: [http://localhost:5000](http://localhost:5000)
 
 ---
+
+
+## 📤 Användning med Docker Hub
+
+Om du vill använda den färdigbyggda versionen från **Docker Hub**:
+
+**Ladda ner & starta FlashGPT direkt från Docker Hub**
+```sh
+docker pull elfgren89/flashgpt:latest
+docker run -d --name flashgpt -p 3000:3000 -p 5000:5000 elfgren89/flashgpt
+```
+
+
+---
+
+## 🐳 Användning med Docker
+
+### 🏗️ Bygg & starta lokalt (utan att använda Docker Hub)
+Om du vill köra lokalt utan att hämta från Docker Hub:
+
+```sh
+docker build -t elfgren89/flashgpt -f Dockerfile .
+docker-compose -p flashgpt up -d --build
+```
+
+
 
 ## 🛠️ Teknisk översikt
 
