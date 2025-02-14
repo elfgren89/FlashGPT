@@ -68,9 +68,6 @@ function AnalysisPanel({ onAnalyze, analysisResult, loadingAnalyze, tokenInfo, p
           <p style={{ margin: "5px 0" }}>
             <strong>Uppskattade tokens:</strong> {tokenInfo.tokenCount}
           </p>
-          <p style={{ margin: "5px 0" }}>
-            <strong>Beräknad AI-kostnad:</strong> ${tokenInfo.estimatedCost.toFixed(5)}
-          </p>
         </div>
       )}
 

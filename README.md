@@ -1,4 +1,4 @@
-# FlashGPT - Forum Scraper
+# FlashGPT - Din AI-assistent för flashback.org
 
 **FlashGPT** är ett verktyg för att snabbt analysera och sammanfatta forumtrådar på **Flashback**. Istället för att manuellt plöja igenom hundratals inlägg kan du skrapa trådar och få en sammanfattning direkt. Perfekt för att snabbt få en överblick över heta diskussioner.
 
@@ -27,6 +27,13 @@ GEMINI_API_KEY=din_gemini_nyckel
 
 ### 3️⃣ Bygg & starta med Docker
 Om du använder Docker:
+
+Bygg backend- och frontend-images:
+docker build -t flashgpt-backend -f backend/Dockerfile backend/
+docker build -t flashgpt-frontend -f frontend/Dockerfile frontend/
+
+Starta med Docker Compose:
+
 ```sh
 docker-compose -p flashgpt up -d --build
 ```
@@ -60,16 +67,8 @@ npm start
 | Komponent   | Teknologi |
 |-------------|----------|
 | **Frontend**  | React, Serve (för statiska filer) |
-| **Backend**   | Node.js, Express, Puppeteer (för web scraping) |
+| **Backend**   | Node.js, Express, Cheerio (för web scraping) |
 | **Datakällor** | Flashback.org |
 | **AI-modeller** | OpenAI GPT & Gemini |
 
 ---
-
-## 📄 Licens
-Detta projekt är licensierat under **MIT License**.
-
----
-
-## ✨ Bidra
-Vill du bidra till projektet? Gör en **fork**, skapa en ny branch och skicka en pull request! 🚀
