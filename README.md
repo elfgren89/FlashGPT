@@ -66,8 +66,9 @@ Om du vill använda den färdigbyggda versionen från **Docker Hub**:
 docker pull elfgren89/flashgpt:latest
 
 ```
-**Kör igång FlashGPT 
-(GLÖM INTE ATT ÄNDRA GEMINI_API_KEY till din faktiska nyckel! Gratis nyckel kan hämtas här: https://aistudio.google.com/app/apikey)
+**Kör igång FlashGPT**
+
+(Glöm inte att ändra GEMINI_API_KEY till din faktiska nyckel! Gratis nyckel kan hämtas här: https://aistudio.google.com/app/apikey)
 ```sh
 docker run -d --name flashgpt -p 3000:3000 -p 5000:5000 -e GEMINI_API_KEY=your_gemini_key_here -e USE_GEMINI=true elfgren89/flashgpt
 
