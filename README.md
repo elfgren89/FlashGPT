@@ -8,22 +8,22 @@
 
 **FlashGPT** är ett verktyg för att snabbt analysera och sammanfatta forumtrådar på **Flashback**. Istället för att manuellt plöja igenom hundratals inlägg kan du skrapa trådar och få en sammanfattning direkt. Perfekt för att snabbt få en överblick över heta diskussioner.
 
-## 🚀 Funktioner
+## Funktioner
 
-- **🔍 Skrapa valfria Flashback-trådar** – Ange en URL och få en sammanfattning.
-- **🔥 Populära trådar** – Få en lista över de mest aktiva trådarna just nu.
-- **🤖 AI-analys** – Använder **OpenAI** och **Gemini** för att generera sammanfattningar.
-- **⚡ Snabb & effektiv** – Slipp läsa 1000+ inlägg, få kärnan direkt.
+- ** Skrapa valfria Flashback-trådar** – Ange en URL och få en sammanfattning.
+- ** Populära trådar** – Få en lista över de mest aktiva trådarna just nu.
+- ** AI-analys** – Använder **OpenAI** och **Gemini** för att generera sammanfattningar.
+- ** Snabb & effektiv** – Slipp läsa 1000+ inlägg, få kärnan direkt.
 
-## 📦 Installation & Körning
+##  Installation & Körning
 
-### 1️⃣ Klona repot
+### 1️ Klona repot
 ```sh
 git clone https://github.com/elfgren89/FlashGPT.git
 cd FlashGPT
 ```
 
-### 2️⃣ Lägg till API-nycklar i `.env`
+### 2️ Lägg till API-nycklar i `.env`
 Skapa en `.env`-fil i `backend/` baserat på `.env.example` och fyll i dina egna API-nycklar för OpenAI och Gemini.
 
 ```env
@@ -33,31 +33,31 @@ GEMINI_API_KEY=din_gemini_nyckel
 
 ---
 
-###  3️⃣Kör manuellt (utan Docker)
+###  3️ Kör manuellt (utan Docker)
 Om du vill köra direkt på din dator:
 
-#### 🖥️ Backend
+#### Backend
 ```sh
 cd backend
 npm install
 node server.js
 ```
 
-#### 🎨 Frontend
+#### Frontend
 ```sh
 cd frontend
 npm install
 npm start
 ```
 
-### 4️⃣Öppna i webbläsaren
+### 4 Öppna i webbläsaren
 - **Frontend** körs på: [http://localhost:3000](http://localhost:3000)
 - **Backend** körs på: [http://localhost:5000](http://localhost:5000)
 
 ---
 
 
-## 📤 Användning med Docker Hub
+## Användning med Docker Hub
 
 Om du vill använda den färdigbyggda versionen från **Docker Hub**:
 
@@ -79,9 +79,9 @@ docker run -d --name flashgpt -p 3000:3000 -p 5000:5000 -e GEMINI_API_KEY=your_g
 
 ---
 
-## 🐳 Användning med Docker
+## Användning med Docker
 
-### 🏗️ Bygg & starta lokalt (utan att använda Docker Hub)
+### Bygg & starta lokalt (utan att använda Docker Hub)
 Om du vill köra lokalt utan att hämta från Docker Hub:
 
 ```sh
@@ -91,7 +91,7 @@ docker-compose -p flashgpt up -d --build
 
 
 
-## 🛠️ Teknisk översikt
+## Teknisk översikt
 
 | Komponent   | Teknologi |
 |-------------|----------|
